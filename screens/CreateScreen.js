@@ -13,18 +13,22 @@ const CreateScreen = () => {
   const [message, setMessage] = useState('');  
 
   const addProduct = () => {
-    addDoc(collection(db, "products"), {     
-          name: name,
-          description: description,
-          amount: amount,
-        }).then(() => { 
-          // Data saved successfully!
-          setMessage(Submitted);  
+    if (!name.trim() || !description.trim() || !amount.trim()) {
+      alert('Please Fill The Missing Fields!');
+      return;
+    }
+    else {
+      addDoc(collection(db, "products"), {     
+            name: name,
+            description: description,
+            amount: amount,
+          }).then(() => { 
+            setMessage("Submitted");  
 
-        }).catch((error) => {
-              // The write failed...
-              console.log(error);
-        });
+          }).catch((error) => {
+                console.log(error);
+          });
+      }
     }
 
   return (
@@ -56,7 +60,9 @@ const CreateScreen = () => {
         >
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
-        <Text>? {message}</Text>
+        <View>
+          {message ? <Text>{message}</Text>: ""}
+        </View>
       </View>
     </KeyboardAvoidingView>
   )
