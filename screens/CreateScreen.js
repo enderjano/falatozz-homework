@@ -1,16 +1,18 @@
-import {KeyboardAvoidingView, StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { useState } from 'react'
-import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, getDocs, where, query } from "firebase/firestore"; 
+import {KeyboardAvoidingView, StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { useState } from 'react';
+import { collection, addDoc } from "firebase/firestore"; 
 import { db } from '../components/config';
-
+import { useNavigation } from '@react-navigation/core';
 
 
 const CreateScreen = () => {
   const [name, setName] = useState(''); 
   const [description, setDescription] = useState(''); 
   const [amount, setAmount] = useState('');
-  const [message, setMessage] = useState('');  
+  const [message, setMessage] = useState('');
+  
+  const navigation = useNavigation();
 
   const addProduct = () => {
     if (!name.trim() || !description.trim() || !amount.trim()) {
@@ -28,6 +30,7 @@ const CreateScreen = () => {
           }).catch((error) => {
                 console.log(error);
           });
+      navigation.replace("Read");
       }
     }
 

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateScreen from './screens/CreateScreen';
-import GridView from './components/GridView';
 import ReadScreen from './screens/ReadScreen';
 
 
