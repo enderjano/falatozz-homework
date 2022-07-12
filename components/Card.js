@@ -4,7 +4,7 @@ import React from 'react'
 const Card = (product) => {
   return (
     <View>
-      <Text>{product}</Text>
+      <Text>{product.name}</Text>
     </View>
   )
 }

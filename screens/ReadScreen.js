@@ -7,26 +7,30 @@ import { Button } from 'react-native-web';
 
 const ReadScreen = () => {
     const products = [];
-    const [data, setData] = useState(false);
+    const [data, setData] = useState([]);
+    const test = data.map(product => {return <Card key={Math.random()} product={product}/> })
+    
     
 
     useEffect(() => {
     getDocs(collection(db, "products")).then(docSnap => {
         docSnap.forEach((doc)=> {
-            products.push({ ...doc.data() })
+            products.push({ ...doc.data() , id:doc.id})
         })});
     })
 
     const print = () => {
-            setData(!data);
-            console.log(products);
+            setData(products);
+            products.map(y => {console.log(y.id)})
+            console.log(data)
+            products.map(product => {return <Card key={Math.random()} product={product}/> })
           };
 
 
     return (
         <View>
             <Button onPress={print}></Button>
-            {data && <FlatList data={products} renderItem={(element) => {console.log(element)}}></FlatList>}
+            {test}
         </View>
   )
 }
